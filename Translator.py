@@ -32,7 +32,7 @@ class Translator:
 				en_sentence += ' '+self.dict[word][0]
 			else:
 				en_sentence += word
-		en_sentence = en_sentence.strip()
+		en_sentence = en_sentence.strip() + '.'
 		return en_sentence
 
 def main():
