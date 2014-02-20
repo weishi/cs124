@@ -38,7 +38,7 @@
 目前: currently; at present
 共有: total; have altogether
 7所: 7
-学院: college; school; insititue; academy; institution; faculty; university
+学院: college; school; institute; academy; institution; faculty; university
 自: from; science; oneself; certainly
 1950: 1950
 年代: age; era; decade; period
@@ -54,7 +54,7 @@
 学习: learn; study
 工作: work
 其: its; their: his; her
-校友: alumunus
+校友: alumnus
 涵盖: cover
 富豪: magnate; plutocracy; plutocrat; nabob
 企业家: entrepreneur
