@@ -5,10 +5,9 @@
 坐落: located
 于: in; at; on; to; for; of; with regard to; in regard to; regarding; when
 美国: United States
-加利佛尼亚: California
+加利福尼亚: California
 州: State
 市: City
-的:??
 私立: private
 研究: research
 型: type; model
@@ -56,9 +55,11 @@
 其: its; their: his; her
 校友: alumnus
 涵盖: cover
+30名: 30
 富豪: magnate; plutocracy; plutocrat; nabob
 企业家: entrepreneur
 及: and
+17名: 17
 太空员: astronaut
 亦: also
 多: many; much
