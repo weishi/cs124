@@ -1,7 +1,7 @@
 斯坦福: Stanford
 大学: University
 为: for; be; serve as; act as; become; mean; make; because of
-一所: one
+一: one
 坐落: located
 于: in; at; on; to; for; of; with regard to; in regard to; regarding; when
 美国: United States
@@ -36,15 +36,14 @@
 辖下: department
 目前: currently; at present
 共有: total; have altogether
-7所: 7
+所: place; office; spot
 学院: college; school; institute; academy; institution; faculty; university
 自: from; science; oneself; certainly
-1950: 1950
 年代: age; era; decade; period
 起: start; begin
 已经: already
 有: have
-58名: 58
+名: name; people
 诺贝尔奖: Nobel
 得主: winner
 现: present; current
@@ -55,11 +54,9 @@
 其: its; their: his; her
 校友: alumnus
 涵盖: cover
-30名: 30
 富豪: magnate; plutocracy; plutocrat; nabob
 企业家: entrepreneur
 及: and
-17名: 17
 太空员: astronaut
 亦: also
 多: many; much
@@ -89,14 +86,12 @@
 难: difficult; hard
 入读: enroll
 在: in; at; be; exist; remain
-36631名: 36631
-2016年: 2016
+年: year; age
 本科: undergraduate
 课程: course
 申请者: applicant
 当中: among
 只有: only
-2427: 2427
 人: person; people
 获得: get; obtain; receive; gain; acquire
 录取: admit; enroll; recruit
@@ -120,7 +115,7 @@
 突出: prominent; outstanding
 成绩: score; mark; achievement; result
 谈: talk; speak; discuss
-一个: one
+个: individual; piece; oneself
 重要: important
 话题: topic
 就是: is
@@ -137,9 +132,8 @@
 时: time
 并不: not at all 
 有名: famous; celebrated; well-known
-1891年: 1891
-10月: October
-1日: First
+月: month; moon
+日: date; day; Japan; sun
 举行: hold
 开学: school opens; term begins
 典礼: ceremony
