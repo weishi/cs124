@@ -1,7 +1,8 @@
 斯坦福: Stanford
 大学: University
 为: for; be; serve as; act as; become; mean; make; because of
-一: one
+一: a; an; one
+所: mw; place; office; spot
 坐落: located
 于: in; at; on; to; for; of; with regard to; in regard to; regarding; when
 美国: United States
@@ -13,7 +14,7 @@
 型: type; model
 该: this
 校: school
-位于: located
+位于: located in
 硅谷: Silicon Valley
 西北方: Northwest
 邻近: neighboring; close to
@@ -23,8 +24,8 @@
 著名: famous; celebrated; outstanding; well-known
 人士: person
 并: and; also; simultaneously; combine; merge; union
-因: because
-学术: scholarship; learning; science; skill; education; knowledge; discipline; subject
+因: because; because of
+学术: academic; scholarship; learning; science; skill; education; knowledge; discipline; subject
 声誉: reputation
 而: and; while; but; yet; as well as
 获评为: was rated
@@ -33,17 +34,16 @@
 高等: advanced; higher
 学府: university
 之一: one of
-辖下: department
+辖下: in; under; department
 目前: currently; at present
 共有: total; have altogether
-所: place; office; spot
 学院: college; school; institute; academy; institution; faculty; university
 自: from; science; oneself; certainly
 年代: age; era; decade; period
 起: start; begin
 已经: already
 有: have
-名: name; people
+名: mw; name; people
 诺贝尔奖: Nobel
 得主: winner
 现: present; current
@@ -115,11 +115,11 @@
 突出: prominent; outstanding
 成绩: score; mark; achievement; result
 谈: talk; speak; discuss
-个: individual; piece; oneself
+个: mw; individual; piece; oneself
 重要: important
 话题: topic
 就是: is
-老: old
+老: old; elder
 出生: be born
 富裕: rich 
 农场主: farmer
