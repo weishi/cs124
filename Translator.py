@@ -3,16 +3,18 @@
 import math
 import os
 import codecs
-#this package is for pluralization pattern.en.pluralize("dog")
 import pattern.en
 
 from stat_parser import Parser, display_tree
+from nltk.tree import Tree
 
 class Translator:
     def __init__(self):
         self.filename='dictionary.txt'
         self.dict = {}
         self.specialWords = [u'了', u'的']
+        self.directions = ['east', 'west', 'south', \
+        'north','northeast', 'southeast', 'northwest', 'southwest']
         self.parser = Parser()
     
     def tranlate(self):
@@ -27,7 +29,6 @@ class Translator:
             en_words = [w.strip() for w in t[1].split(';')]
             self.dict[cn_word] = en_words
         f.close()
-
 
     def isNumerical(self, word):
         if word.isdigit():
@@ -58,29 +59,34 @@ class Translator:
         en_sentence.append('.')
         return en_sentence
 
-    def pluralize(self, sentence):
+    def parse(self, sentence):
         sent_str = ''
         for w in sentence:
             sent_str += w + ' '
         sent_str = sent_str.strip()
         tree = self.parser.parse(sent_str)
-        poslist = tree.pos()
-        new_sent = []
-        i = 0
-        while i < len(poslist):
-            pos = poslist[i]
-            i += 1
-            new_sent.append(pos[0])
-            if pos[1] == 'CD' and not pos[0] in ['1', 'a', 'an', 'one']:
-                while i < len(poslist):
-                    nextPos = poslist[i]
-                    i += 1
-                    if nextPos[1] == 'NN':
-                        new_sent.append(pattern.en.pluralize(nextPos[0]))
-                        break
-                    else:
-                        new_sent.append(nextPos[0])
-        return new_sent
+        return tree
+
+    def pluralize(self, tree):
+        if type(tree) is Tree:
+            if tree.node == 'NP':
+                findCD = False
+                for child in tree:
+                    if child.node == 'CD' and child[0] \
+                    not in ['1', 'a', 'an', 'one']:
+                        findCD = True
+                    if findCD and child.node == 'NN':
+                        child[0] = pattern.en.pluralize(child[0])
+                        return
+            for child in tree:
+                self.pluralize(child)
+
+
+
+    def fowardDirctionWord(self, sentence):
+        pass
+
+
 
 def main():
     runner=Translator()
@@ -90,7 +96,9 @@ def main():
     for i in ls :
         sentence = ''
         wl = runner.baseline(i)
-        wl = runner.pluralize(wl)
+        tree = runner.parse(wl)
+        runner.pluralize(tree)
+        wl = tree.leaves()
         for w in wl:
             sentence += w+' '
         print sentence
