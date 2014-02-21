@@ -83,9 +83,34 @@ class Translator:
 
 
 
-    def fowardDirctionWord(self, sentence):
-        pass
+    def arrangeLoctions(self, tree):
+        if type(tree) is Tree:
+            if tree.node == 'NAC':
+                for i in range(0, len(tree)):
+                    child = tree[i]
+                    if i<len(tree)-1 and child.node == 'NNP' \
+                    and tree[i+1][0].lower() in ['state', 'city']:
+                        del tree[i+1]
+                        del tree[i]
+                        tree.insert(0, child)
+                    if i >= len(tree)-1:
+                        break
+            for child in tree:
+                self.arrangeLoctions(child)
 
+    def fowardDirctionWord(self, tree):
+        if type(tree) is Tree:
+            if tree.node == 'NP':
+                for i in range(0, len(tree)):
+                    child = tree[i]
+                    if child.node in ['NNP', 'NNPS'] and child[0].lower() \
+                    in self.directions:
+                        del tree[i]
+                        child[0] = 'the '+child[0]+' of'
+                        tree.insert(0, child)
+                        return
+            for child in tree:
+                self.fowardDirctionWord(child)
 
 
 def main():
@@ -98,6 +123,8 @@ def main():
         wl = runner.baseline(i)
         tree = runner.parse(wl)
         runner.pluralize(tree)
+        runner.fowardDirctionWord(tree)
+        runner.arrangeLoctions(tree)
         wl = tree.leaves()
         for w in wl:
             sentence += w+' '
