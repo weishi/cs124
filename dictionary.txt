@@ -1,24 +1,23 @@
 斯坦福: Stanford
 大学: University
-为: for; be; serve as; act as; become; mean; make; because of
+为: as; for; be; serve as; act as; become; mean; make; because of
 一: a; an; one
 所: mw; place; office; spot
 坐落: located
 于: in; at; on; to; for; of; with regard to; in regard to; regarding; when
 美国: United States
-加利福尼亚: California
-州: State
+加利福尼亚州: California State
 市: City
 私立: private
-研究: research
-型: type; model
+研究型: research
 该: this
 校: school
 位于: located in
 硅谷: Silicon Valley
 西北方: Northwest
 邻近: near; neighboring; close to
-帕罗奥图: Palo Alto
+帕罗: Palo
+奥图: Alto
 培养: train
 不少: many; not a few
 著名: famous; celebrated; outstanding; well-known
@@ -28,7 +27,7 @@
 学术: academic; scholarship; learning; science; skill; education; knowledge; discipline; subject
 声誉: reputation
 而: and; while; but; yet; as well as
-获评为: was rated
+获评: was rated
 世上: world
 最: most
 高等: advanced; higher
@@ -36,15 +35,17 @@
 之一: one of
 辖下: in; under; department
 目前: currently; at present
-共有: total; have altogether
+共: total
+有: have
 学院: college; school; institute; academy; institution; faculty; university
 自: from; science; oneself; certainly
-年代: age; era; decade; period
+1950年代: 1950’s
 起: start; begin
 已经: already
 有: have
 名: mw; name; people
-诺贝尔奖: Nobel
+诺贝尔: Nobel
+奖: prize; award
 得主: winner
 现: present; current
 或: or
@@ -74,9 +75,9 @@
 耐克: Nike
 升阳电脑: Sun Microsystems
 等: wait; etc.
-也: also; too
-是: is; are; am
-马丁路德: Martin Luther
+也是: also is
+马丁: Martin
+路德: Luther
 手写: handwriting
 原稿: originals
 保存: save; keep; preserve; hold; conserve
@@ -86,7 +87,7 @@
 难: difficult; hard
 入读: enroll
 在: in; at; be; exist; remain
-年: year; age
+2016年: 2016
 本科: undergraduate
 课程: course
 申请者: applicant
@@ -95,7 +96,9 @@
 人: person; people
 获得: get; obtain; receive; gain; acquire
 录取: admit; enroll; recruit
-全国: nationwide
+是: is; am: are
+全: entire; all
+国: nation; country
 第二: second
 选择性: selective
 高: high
@@ -108,6 +111,8 @@
 资金: funds; funding
 设备: equipment; device
 条件: condition
+斯大: Stanford University
+研究: research
 科学: science
 方面: aspect
 取得: obtain; acquire; gain 
@@ -132,8 +137,9 @@
 时: time
 并不: not at all 
 有名: famous; celebrated; well-known
-月: month; moon
-日: date; day; Japan; sun
+1891年: 1891
+10月: October
+1日: First
 举行: hold
 开学: school opens; term begins
 典礼: ceremony

@@ -43,6 +43,14 @@ class Translator:
         words = sentence.split(' ')
         en_sentence = []
         for word in words:
+            if word == u'。':
+                word = '.'
+            elif word == u'，':
+                word = ','
+            elif word == u'“' or word == u'”':
+                word = '"'
+            elif word == u'、':
+                word = ','
             if word in self.specialWords:
                 continue
             if word in self.dict:
@@ -56,7 +64,6 @@ class Translator:
                 en_sentence.append(self.dict[word][0])
             else:
                 en_sentence.append(word)
-        en_sentence.append('.')
         return en_sentence
 
     def parse(self, sentence):
@@ -69,11 +76,11 @@ class Translator:
 
     def pluralize(self, tree):
         if type(tree) is Tree:
-            if tree.node == 'NP':
+            if tree.node in ['NP','ADJP']:
                 findCD = False
                 for child in tree:
-                    if child.node == 'CD' and child[0] \
-                    not in ['1', 'a', 'an', 'one']:
+                    if child.node == 'CD' and not type(child[0]) is Tree\
+                    and child[0] not in ['1', 'a', 'an', 'one']:
                         findCD = True
                     if findCD and child.node == 'NN':
                         child[0] = pattern.en.pluralize(child[0])
@@ -81,15 +88,14 @@ class Translator:
             for child in tree:
                 self.pluralize(child)
 
-
-
     def arrangeLoctions(self, tree):
         if type(tree) is Tree:
             if tree.node == 'NAC':
                 for i in range(0, len(tree)):
                     child = tree[i]
                     if i<len(tree)-1 and child.node == 'NNP' \
-                    and tree[i+1][0].lower() in ['state', 'city']:
+                    and not type(tree[i+1][0]) is Tree and \
+                    tree[i+1][0].lower() in ['state', 'city']:
                         del tree[i+1]
                         del tree[i]
                         tree.insert(0, child)
@@ -103,7 +109,8 @@ class Translator:
             if tree.node == 'NP':
                 for i in range(0, len(tree)):
                     child = tree[i]
-                    if child.node in ['NNP', 'NNPS'] and child[0].lower() \
+                    if child.node in ['NNP', 'NNPS'] and \
+                    not type(child[0]) is Tree and child[0].lower() \
                     in self.directions:
                         del tree[i]
                         child[0] = 'the '+child[0]+' of'
