@@ -2,6 +2,7 @@
 
 import math
 import os
+import re
 import codecs
 import pattern.en
 
@@ -88,7 +89,7 @@ class Translator:
             for child in tree:
                 self.pluralize(child)
 
-    def arrangeLoctions(self, tree):
+    def arrangeLocations(self, tree):
         if type(tree) is Tree:
             if tree.node == 'NAC':
                 for i in range(0, len(tree)):
@@ -102,9 +103,9 @@ class Translator:
                     if i >= len(tree)-1:
                         break
             for child in tree:
-                self.arrangeLoctions(child)
+                self.arrangeLocations(child)
 
-    def fowardDirctionWord(self, tree):
+    def forwardDirectionWord(self, tree):
         if type(tree) is Tree:
             if tree.node == 'NP':
                 for i in range(0, len(tree)):
@@ -117,7 +118,57 @@ class Translator:
                         tree.insert(0, child)
                         return
             for child in tree:
-                self.fowardDirctionWord(child)
+                self.forwardDirectionWord(child)
+
+    def arrangeDate(self,sentence):
+        year=r'[12]\d{3}'
+        month=r'January|February|March|April|May|June|July|August|September|October|November|December' 
+        day=r'\d{1,2}'
+        for i in range(len(sentence)):
+            yWord=mWord=dWord=''
+            word=sentence[i]
+            if re.match(year,word):
+                yWord=sentence[i]
+                if i+1<len(sentence):
+                    nextWord=sentence[i+1]
+                    if re.match(month, nextWord):
+                        mWord=nextWord.capitalize()
+                        if i+2<len(sentence):
+                            nextNextWord=sentence[i+2]
+                            if re.match(day, nextNextWord):
+                                dWord=nextNextWord
+            if yWord!='' and mWord!='' and dWord!='':
+                sentence[i:i+3]=[mWord, dWord, yWord]
+                i+=3
+            elif yWord!='' and mWord!='':
+                sentence[i:i+2]=[mWord, yWord]
+                i+=2
+
+        return sentence
+
+    def postProcess(self,sentence):
+        strategies=[\
+        (self.pluralize, True), \
+        (self.forwardDirectionWord, True), \
+        (self.arrangeLocations, True),\
+        (self.arrangeDate, False)\
+        ]
+
+        for (func,isTree) in strategies:
+            if not isTree:
+                sentence=func(sentence)
+                #print 'Processing...',sentence
+
+        tree=self.parse(sentence)
+        for (func,isTree) in strategies:
+            if isTree:
+                func(tree)
+
+        wl=tree.leaves()
+        sentence=' '.join(wl)
+        return sentence
+
+
 
 
 def main():
@@ -128,13 +179,12 @@ def main():
     for i in ls :
         sentence = ''
         wl = runner.baseline(i)
-        tree = runner.parse(wl)
-        runner.pluralize(tree)
-        runner.fowardDirctionWord(tree)
-        runner.arrangeLoctions(tree)
-        wl = tree.leaves()
-        for w in wl:
-            sentence += w+' '
+        #tree = runner.parse(wl)
+        #display_tree(tree)
+        sentence=runner.postProcess(wl)
+        #wl = tree.leaves()
+        #for w in wl:
+        #    sentence += w+' '
         print sentence
 
 if __name__=='__main__':
