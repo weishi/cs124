@@ -52,6 +52,8 @@ class Translator:
                 word = '"'
             elif word == u'、':
                 word = ','
+            elif word == u'：':
+                word = ':'
             if word in self.specialWords:
                 continue
             if word in self.dict:
@@ -120,6 +122,13 @@ class Translator:
             for child in tree:
                 self.forwardDirectionWord(child)
 
+    def suchAs(self,sentence):
+        st=' '.join(sentence)
+        reg=r'for example : ([\w\s,]+) wait \.'
+        st=re.sub(reg, 'such as \g<1>, etc.', st)
+        return st.split(' ')
+
+
     def arrangeDate(self,sentence):
         year=r'[12]\d{3}'
         month=r'January|February|March|April|May|June|July|August|September|October|November|December' 
@@ -170,7 +179,8 @@ class Translator:
         (self.forwardDirectionWord, True), \
         (self.arrangeLocations, True),\
         (self.superlative, True),\
-        (self.arrangeDate, False)\
+        (self.arrangeDate, False),\
+        (self.suchAs, False)\
         ]
 
         #Process flat sentence first
@@ -180,7 +190,7 @@ class Translator:
 
         #Process sentence tree 
         tree=self.parse(sentence)
-        if 'high' in sentence and False:
+        if 'Google' in sentence and False:
             display_tree(tree)
         for (func,isTree) in strategies:
             if isTree:
