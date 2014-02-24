@@ -146,20 +146,42 @@ class Translator:
 
         return sentence
 
+    def superlative(self, tree):
+        if type(tree) is Tree:
+            for i in range(0, len(tree)):
+                if i+1<len(tree):
+                    if tree[i].node=='RBS' and tree[i+1].node=='JJ':
+                        if type(tree[i][0]) is not Tree and \
+                        type(tree[i+1][0]) is not Tree:
+                            superWord = pattern.en.superlative(tree[i+1][0])
+                            if 'most'==superWord:
+                                del tree[i+1]
+                            elif 'most' not in superWord:
+                                tree[i+1][0]=superWord
+                                del tree[i]
+                        return
+            for child in tree:
+                self.superlative(child)
+
+
     def postProcess(self,sentence):
         strategies=[\
         (self.pluralize, True), \
         (self.forwardDirectionWord, True), \
         (self.arrangeLocations, True),\
+        (self.superlative, True),\
         (self.arrangeDate, False)\
         ]
 
+        #Process flat sentence first
         for (func,isTree) in strategies:
             if not isTree:
                 sentence=func(sentence)
-                #print 'Processing...',sentence
 
+        #Process sentence tree 
         tree=self.parse(sentence)
+        if 'high' in sentence and False:
+            display_tree(tree)
         for (func,isTree) in strategies:
             if isTree:
                 func(tree)
@@ -179,13 +201,14 @@ def main():
     for i in ls :
         sentence = ''
         wl = runner.baseline(i)
+        print 'Base  =>', ' '.join(wl) 
         #tree = runner.parse(wl)
         #display_tree(tree)
         sentence=runner.postProcess(wl)
         #wl = tree.leaves()
         #for w in wl:
         #    sentence += w+' '
-        print sentence
+        print 'After =>', sentence 
 
 if __name__=='__main__':
     main()
