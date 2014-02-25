@@ -93,38 +93,37 @@
 申请者: applicant
 当中: among
 只有: only
-人: person; people
-获得: get; obtain; receive; gain; acquire
+人: person
+获得: get(VV); obtain(VV); gain(VV); acquire
 录取: admit; enroll; recruit
-是: is; am: are
-全: entire; all
-国: nation; country
+是: is(VC); am(VC); are(VC)
+全: entire(JJ); all(JJ)
+国: nation(NN); country(NN)
 第二: second
 选择性: selective
 高: high
-凭借: rely; depend
+凭借: rely(VV); depend(VV)
 学校: school
 人才: talented person
 优势: superiority
 和: and
-丰富: rich; abundant; vast; plenty; plentiful; great
-资金: funds; funding
-设备: equipment; device
+丰富: rich
+资金: funds
+设备: equipment
 条件: condition
-斯大: Stanford University
 研究: research
 科学: science
 方面: aspect
-取得: obtain; acquire; gain 
-十分: very; fully
-突出: prominent; outstanding
-成绩: score; mark; achievement; result
-谈: talk; speak; discuss
-个: mw; individual; piece; oneself
+取得: obtain
+十分: very(AD); fully(AD)
+突出: prominent
+成绩: score
+谈: talk
+个: (m); individual(JJ)
 重要: important
 话题: topic
 就是: is
-老: old; elder
+老: old
 出生: be born
 富裕: rich 
 农场主: farmer
@@ -133,12 +132,14 @@
 西部: west
 哈佛: Harvard
 之称: said
-创: create; found
+创: create(VV); found(VV)
 时: time
 并不: not at all 
-有名: famous; celebrated; well-known
+有名: famous
 1891年: 1891
+1901年: 1901
 10月: October
+12月: December 
 1日: 1
 举行: hold
 开学: school opens; term begins
