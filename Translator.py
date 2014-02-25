@@ -227,8 +227,15 @@ class Translator:
                 func(tree)
 
         wl=tree.leaves()
-        sentence=' '.join(wl)
-        return sentence
+        result=''
+        for i in range(len(wl)):
+            if i==0:
+                result=wl[0].capitalize()
+            elif wl[i]==',' or wl[i]=='.':
+                result+=wl[i]
+            else:
+                result+=' '+wl[i]
+        return result+'.' 
 
 
 
