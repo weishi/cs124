@@ -188,7 +188,7 @@ class Translator:
                     if tree[i].node=='RBS' and tree[i+1].node=='JJ':
                         if type(tree[i][0]) is not Tree and \
                         type(tree[i+1][0]) is not Tree:
-                            superWord = pattern.en.superlative(tree[i+1][0])
+                            superWord = 'the' + pattern.en.superlative(tree[i+1][0])
                             if 'most'==superWord:
                                 del tree[i+1]
                             elif 'most' not in superWord:
