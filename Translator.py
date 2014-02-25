@@ -5,9 +5,11 @@ import os
 import re
 import codecs
 import pattern.en
+import nltk
 
 from stat_parser import Parser, display_tree
 from nltk.tree import Tree
+from pattern.en import conjugate
 
 class Translator:
     def __init__(self):
@@ -54,7 +56,12 @@ class Translator:
                 word = ','
             elif word == u'：':
                 word = ':'
+            elif word == u'``':
+                word = '"'
             if word in self.specialWords:
+                #add tense
+                if word == u'了':
+                    en_sentence[-1] = conjugate(en_sentence[-1], 'p')
                 continue
             if word in self.dict:
                 #remove measure words
@@ -76,6 +83,25 @@ class Translator:
         sent_str = sent_str.strip()
         tree = self.parser.parse(sent_str)
         return tree
+
+    def orderOneOf(self, sentence):
+        full_sentence = nltk.word_tokenize(' '.join(sentence))
+        tags = nltk.pos_tag(full_sentence)
+        new_sentence = []
+        for i in range(len(full_sentence) - 1):
+            if full_sentence[i] == 'one' and full_sentence[i + 1] == 'of':
+                for j in reversed(range(i - 1)):
+                    if 'VB' in tags[j][1] and tags[j][1] != 'VBD' and tags[j + 1][1] == 'RB':
+                        new_sentence.insert(j + 2, 'of')
+                        new_sentence.insert(j + 2, 'one')
+                        break
+                    elif tags[j][1] == 'IN' or ('VB' in tags[j][1] and tags[j][1] != 'VBD'):
+                        new_sentence.insert(j + 1, 'of')
+                        new_sentence.insert(j + 1, 'one')
+                        break
+            elif i < 2 or (full_sentence[i] != 'of' and full_sentence[i - 1] != 'one'):
+                new_sentence.append(full_sentence[i])
+        return new_sentence
 
     def pluralize(self, tree):
         if type(tree) is Tree:
@@ -180,6 +206,7 @@ class Translator:
         (self.arrangeLocations, True),\
         (self.superlative, True),\
         (self.arrangeDate, False),\
+        (self.orderOneOf, False), \
         (self.suchAs, False)\
         ]
 
