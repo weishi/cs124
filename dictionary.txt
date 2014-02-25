@@ -48,54 +48,52 @@
 奖: prize; award
 得主: winner
 现: present; current
-或: or
-曾: once; already; before
-学习: learn; study
-工作: work
-其: its; their: his; her
-校友: alumnus
-涵盖: cover
-富豪: magnate; plutocracy; plutocrat; nabob
-企业家: entrepreneur
-及: and
-太空员: astronaut
-亦: also
-多: many; much
-国会: congress
-成员: member
-院校: institution
-创办: establish: found
-众多: numerous
-公司: company
-机构: organization
-如: for example
-谷歌: Google
-雅虎: Yahoo
-惠普: HP
-耐克: Nike
-升阳电脑: Sun Microsystems
-等: wait; etc.
-也是: is also
-马丁: Martin
-路德: Luther
-手写: handwriting
-原稿: originals
-保存: save; keep; preserve; hold; conserve
-地: place
-长期: long term; long time
-以来: since
-难: difficult; hard
-入读: enroll
-在: in; at; be; exist; remain
-2016年: 2016
-本科: undergraduate
-课程: course
-申请者: applicant
-当中: among
-只有: only
-人: person; people
+或: or(CC)
+曾: once(AD)
+学习: learn(VV)
+工作: work(VV)
+其: its(PN); their(PN): his(PN); her(PN)
+校友: alumnus(NN)
+涵盖: cover(VV)
+富豪: magnate(NR)
+企业家: entrepreneur(NN)
+及: and(CC)
+太空员: astronaut(NN)
+亦: also(AD)
+多: many(AD); much(AD)
+国会: congress(NN)
+成员: member(NN)
+院校: institution(NN)
+创办: establish(VV): found(VV)
+众多: numerous(CD)
+公司: company(NN)
+机构: organization(NN)
+如: for example(AD)
+谷歌: Google(NR)
+雅虎: Yahoo(NR)
+惠普: HP(NR)
+耐克: Nike(NR)
+升阳电脑: Sun Microsystems(NR)
+等: wait(VV); etc.(ETC)
+马丁: Martin(NR)
+路德: Luther(NR)
+手写: handwriting(JJ)
+原稿: originals(NN)
+保存: save(NN); keep(NN); preserve(NN); hold(NN); conserve(NN)
+长期: long time(NN)
+以来: since(LC)
+难: difficult(AD)
+入读: enroll(VV)
+在: in(P); at(P)
+2016年: 2016(NT)
+本科: undergraduate(NN)
+课程: course(NN)
+申请者: applicant(NN)
+当中: among(LC)
+只有: only(AD)
+人: person(NN); people(NN)
 获得: get; obtain; receive; gain; acquire
-录取: admit; enroll; recruit
+录取: admit
 是: is; am: are
 全: entire; all
 国: nation; country
