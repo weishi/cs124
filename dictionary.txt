@@ -142,3 +142,5 @@
 举行: hold
 开学: school opens; term begins
 典礼: ceremony
+伦琴: Rontgen
+物理学家: physicist
