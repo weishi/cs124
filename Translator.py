@@ -6,6 +6,7 @@ import re
 import collections
 import codecs
 import pattern.en
+from pattern.en import verbs, conjugate, PARTICIPLE
 import nltk
 import nltk.collocations
 import nltk.corpus
@@ -144,6 +145,10 @@ class Translator:
 
     def pluralize(self, tree):
         if type(tree) is Tree:
+            if tree.node == 'VB':
+                tree[0] = pattern.en.conjugate(tree[0], '3sg')
+            if tree.node == 'VBP':
+                tree[0] = pattern.en.conjugate(tree[0], tense=PARTICIPLE, parse=True)
             if tree.node in ['NP','ADJP','UCP']:
                 findCD = False
                 for child in tree:
@@ -151,11 +156,12 @@ class Translator:
                     and child[0].lower() not in ['1', 'a', 'an', 'one']:
                         findCD = True
                     if child.node == 'JJ' and not type(child[0]) is Tree\
-                    and child[0].lower() == 'many':
+                    and child[0].lower() in ['many', 'numerous', 'a lot']:
+                        findCD = True
+                    if child.node == 'QP':
                         findCD = True
                     if findCD and child.node == 'NN':
                         child[0] = pattern.en.pluralize(child[0])
-                        return
             for child in tree:
                 self.pluralize(child)
 

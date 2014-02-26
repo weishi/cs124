@@ -35,7 +35,7 @@
 之一: one of
 辖下: in(P); under(P); department(NN)
 目前: currently
-共: total
+共: totally
 有: have
 学院: college(NN); institute(NN)
 自: from(P); oneself(PN); certainly(AD)
