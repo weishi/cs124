@@ -3,9 +3,12 @@
 import math
 import os
 import re
+import collections
 import codecs
 import pattern.en
 import nltk
+import nltk.collocations
+import nltk.corpus
 
 from stat_parser import Parser, display_tree
 from nltk.tree import Tree
@@ -15,6 +18,12 @@ class Translator:
     def __init__(self):
         self.filename='dictionary.txt'
         self.dict = {}
+        bgm  = nltk.collocations.BigramAssocMeasures()
+        finder = nltk.collocations.BigramCollocationFinder.from_words(nltk.corpus.brown.words())
+        scores = finder.score_ngrams(bgm.likelihood_ratio)
+        self.scored = {}
+        for key, score in scores:
+            self.scored[key] = score
         self.specialWords = [u'了', u'的']
         self.directions = ['east', 'west', 'south', \
         'north','northeast', 'southeast', 'northwest', 'southwest']
@@ -25,11 +34,19 @@ class Translator:
 
     def loadDictionary(self):
         f = codecs.open(self.filename,'r','utf-8')
+        regex = re.compile('(.*)\((.*)\)')
         ls = [ line.strip() for line in f]
         for i in ls :
             t = i.split(':')
             cn_word = t[0]
-            en_words = [w.strip() for w in t[1].split(';')]
+            en_words = []
+            for w in t[1].split(';'):
+                word = w.strip()
+                m = regex.match(word) 
+                if (m is not None):
+                    en_words.append((m.group(1), m.group(2)))
+                else:
+                    en_words.append((w, 'default'))
             self.dict[cn_word] = en_words
         f.close()
 
@@ -42,10 +59,13 @@ class Translator:
         else:
             return False
 
-    def baseline(self, sentence):
+    def preProcess(self, sentence, pickWord):
         words = sentence.split(' ')
         en_sentence = []
         for word in words:
+            w = word.split('#')
+            word = w[0]
+            t = w[1]
             if word == u'。':
                 word = '.'
             elif word == u'，':
@@ -65,16 +85,35 @@ class Translator:
                 continue
             if word in self.dict:
                 #remove measure words
-                if 'mw' in self.dict[word]:
+                if 'M' == type:
                     if len(en_sentence) > 0 and self.isNumerical(en_sentence[-1]):
                         #change one to a
                         if en_sentence[-1].lower() == 'one':
                             en_sentence[-1] = 'a'
-                        continue
-                en_sentence.append(self.dict[word][0])
+                    continue
+                if pickWord == 'baseline':
+                    en_sentence.append(self.dict[word][0][0])
+                else:
+                    if len(en_sentence) > 0:
+                        en_sentence.append(self.pick(self.dict[word], t, en_sentence[-1]))
+                    else:
+                        en_sentence.append(self.pick(self.dict[word], t, ''))
             else:
                 en_sentence.append(word)
         return en_sentence
+
+    def pick(self, dict, t, prev):
+        candidates = []
+        for w in dict:
+            if w[1] == t:
+                candidates.append(w[0])
+        if len(candidates) == 0:
+            for w in dict:
+                candidates.append(w[0])
+        if prev == '':
+            return candidates[0]
+        else:
+            return max(candidates, key=lambda x:self.scored[(prev, x)] if (prev, x) in self.scored else 0)
 
     def parse(self, sentence):
         sent_str = ''
@@ -243,14 +282,16 @@ class Translator:
 def main():
     runner=Translator()
     runner.loadDictionary()
-    f = codecs.open('dev.data.txt','r','utf-8')
+    
+    f = codecs.open('dev.data.pos.txt','r','utf-8')
     ls = [line.strip() for line in f]
     for i in ls :
         sentence = ''
-        wl = runner.baseline(i)
+        wl = runner.preProcess(i, 'baseline')
         print 'Base  =>', ' '.join(wl) 
         #tree = runner.parse(wl)
         #display_tree(tree)
+        wl = runner.preProcess(i, 'advanced')
         sentence=runner.postProcess(wl)
         #wl = tree.leaves()
         #for w in wl:

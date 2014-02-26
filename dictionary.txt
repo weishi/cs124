@@ -26,7 +26,7 @@
 因: because(P); because of(P)
 学术: academy(NN); education(NN)
 声誉: reputation
-而: (MSP), and(CC); while(P); but(MSP);
+而: (MSP); and(CC); while(P); but(MSP);
 获评: was rated
 世上: world
 最: most
@@ -40,7 +40,7 @@
 学院: college(NN); institute(NN)
 自: from(P); oneself(PN); certainly(AD)
 1950年代: 1950’s
-起: start(VV), from(LC)
+起: start(VV); from(LC)
 已经: already
 名: (M); name(NN)
 诺贝尔: Nobel
@@ -79,6 +79,7 @@
 手写: handwriting
 原稿: originals
 保存: save(NN); keep(NN); preserve(NN); hold(NN); conserve(NN)
+地: place
 长期: long time
 以来: since
 难: difficult
