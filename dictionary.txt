@@ -149,3 +149,5 @@
 成为: become
 好: good
 也: also 
+1924年: 1924
+3月: March
