@@ -82,7 +82,7 @@ class Translator:
             if word in self.specialWords:
                 #add tense
                 if word == u'了':
-                    en_sentence[-1] = conjugate(en_sentence[-1], 'p')
+                    en_sentence[-1] = conjugate(en_sentence[-1].strip(), 'p')
                 continue
             if word in self.dict:
                 #remove measure words
