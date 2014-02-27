@@ -154,14 +154,11 @@ class Translator:
                 for child in tree:
                     if child.node == 'CD' and not type(child[0]) is Tree\
                     and child[0].lower() not in ['1', 'a', 'an', 'one']:
-                        print "aaa"
                         findCD = True
                     if child.node == 'JJ' and not type(child[0]) is Tree\
                     and child[0].lower() in ['many', 'numerous', 'a lot']:
-                        print "bb"
                         findCD = True
                     if child.node == 'QP':
-                        print "cc"
                         findCD = True
                     if findCD and child.node == 'NN':
                         child[0] = pattern.en.pluralize(child[0])
@@ -275,7 +272,7 @@ class Translator:
 
         #Process flat sentence first
         for (func,isTree) in strategies:
-            print func
+            #print func
             if not isTree:
                 sentence=func(sentence)
             else:
