@@ -256,7 +256,7 @@ class Translator:
                 result+=wl[i]
             else:
                 result+=' '+wl[i]
-        return result
+        return result+'.'
 
 
     def postProcess(self,sentence):
