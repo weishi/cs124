@@ -243,6 +243,9 @@ class Translator:
                             elif 'most' not in superWord:
                                 tree[i+1][0]=superWord
                                 del tree[i]
+                            else:
+                                tree[i+1][0]=superWord
+                                del tree[i]
                         return
             for child in tree:
                 self.superlative(child)
