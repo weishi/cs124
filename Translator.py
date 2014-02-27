@@ -250,30 +250,7 @@ class Translator:
             for child in tree:
                 self.superlative(child)
 
-
-    def postProcess(self,sentence):
-        strategies=[\
-        (self.pluralize, True), \
-        (self.forwardDirectionWord, True), \
-        (self.arrangeLocations, True),\
-        (self.superlative, True),\
-        (self.arrangeDate, False),\
-        (self.orderOneOf, False), \
-        (self.suchAs, False)\
-        ]
-
-        #Process flat sentence first
-        for (func,isTree) in strategies:
-            if not isTree:
-                sentence=func(sentence)
-
-        #Process sentence tree 
-        tree=self.parse(sentence)
-        for (func,isTree) in strategies:
-            if isTree:
-                func(tree)
-
-        wl=tree.leaves()
+    def flatSentence(self, wl):
         result=''
         for i in range(len(wl)):
             if i==0:
@@ -282,7 +259,31 @@ class Translator:
                 result+=wl[i]
             else:
                 result+=' '+wl[i]
-        return result+'.' 
+        return result
+
+
+    def postProcess(self,sentence):
+        strategies=[\
+        (self.suchAs, False),\
+        (self.arrangeDate, False),\
+        (self.pluralize, True), \
+        (self.forwardDirectionWord, True), \
+        (self.arrangeLocations, True),\
+        (self.superlative, True),\
+        (self.orderOneOf, False) \
+        ]
+
+        #Process flat sentence first
+        for (func,isTree) in strategies:
+            print func
+            if not isTree:
+                sentence=func(sentence)
+            else:
+                tree=self.parse(sentence)
+                func(tree)
+                sentence=tree.leaves()
+
+        return self.flatSentence(sentence)
 
 
 

@@ -100,7 +100,7 @@
 第二: second
 选择性: selective
 高: high
-凭借: rely(VV); depend(VV)
+凭借: rely on(VV); depend on(VV)
 学校: school
 人才: talented person
 优势: superiority
