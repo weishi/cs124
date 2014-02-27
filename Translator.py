@@ -265,6 +265,8 @@ class Translator:
 
         #Process sentence tree 
         tree=self.parse(sentence)
+        if 'rely' in sentence:
+            display_tree(tree)
         for (func,isTree) in strategies:
             if isTree:
                 func(tree)
