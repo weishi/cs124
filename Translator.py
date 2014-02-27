@@ -264,10 +264,10 @@ class Translator:
         (self.suchAs, False),\
         (self.arrangeDate, False),\
         (self.pluralize, True), \
-        (self.forwardDirectionWord, True), \
         (self.arrangeLocations, True),\
         (self.superlative, True),\
-        (self.orderOneOf, False) \
+        (self.orderOneOf, False), \
+        (self.forwardDirectionWord, True) \
         ]
 
         #Process flat sentence first
