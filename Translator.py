@@ -145,23 +145,27 @@ class Translator:
 
     def pluralize(self, tree):
         if type(tree) is Tree:
-            if tree.node == 'VB':
+            if tree.node in ['VB', 'VP'] and not type(tree[0]) is Tree:
                 tree[0] = pattern.en.conjugate(tree[0], '3sg')
-            if tree.node == 'VBP':
-                tree[0] = pattern.en.conjugate(tree[0], tense=PARTICIPLE, parse=True)
+            #if tree.node == 'VBP':
+            #   tree[0] = pattern.en.conjugate(tree[0], tense=PARTICIPLE, parse=True)
             if tree.node in ['NP','ADJP','UCP']:
                 findCD = False
                 for child in tree:
                     if child.node == 'CD' and not type(child[0]) is Tree\
                     and child[0].lower() not in ['1', 'a', 'an', 'one']:
+                        print "aaa"
                         findCD = True
                     if child.node == 'JJ' and not type(child[0]) is Tree\
                     and child[0].lower() in ['many', 'numerous', 'a lot']:
+                        print "bb"
                         findCD = True
                     if child.node == 'QP':
+                        print "cc"
                         findCD = True
                     if findCD and child.node == 'NN':
                         child[0] = pattern.en.pluralize(child[0])
+
             for child in tree:
                 self.pluralize(child)
 
