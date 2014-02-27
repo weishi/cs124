@@ -45,9 +45,9 @@ class Translator:
                 word = w.strip()
                 m = regex.match(word) 
                 if (m is not None):
-                    en_words.append((m.group(1), m.group(2)))
+                    en_words.append((m.group(1).strip(), m.group(2).strip()))
                 else:
-                    en_words.append((w, 'default'))
+                    en_words.append((w.strip(), 'default'))
             self.dict[cn_word] = en_words
         f.close()
 
@@ -265,8 +265,6 @@ class Translator:
 
         #Process sentence tree 
         tree=self.parse(sentence)
-        if 'Google' in sentence and False:
-            display_tree(tree)
         for (func,isTree) in strategies:
             if isTree:
                 func(tree)
