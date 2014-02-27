@@ -198,7 +198,6 @@ class Translator:
 
     def suchAs(self,sentence):
         st=' '.join(sentence)
-        print st
         reg=r'for example : ([\w\s,]+) etc\.'
         st=re.sub(reg, 'such as \g<1>, etc', st)
         return st.split(' ')
