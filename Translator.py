@@ -294,7 +294,13 @@ def main():
     
     f = codecs.open('dev.data.pos.txt','r','utf-8')
     ls = [line.strip() for line in f]
-    for i in ls :
+
+    for j in range(0, len(ls)) :
+        i = ls[j]
+        if i < 10:
+            print 'Dev Set Sentence '+ str(j+1)+':'
+        else:
+            print 'Test Set Sentence '+ str(j+1)+':'
         sentence = ''
         wl = runner.preProcess(i, 'baseline')
         print 'Base  =>', ' '.join(wl) 
