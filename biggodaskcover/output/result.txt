@@ -1,0 +1,45 @@
+Test Set Sentence 1:
+Base  => Stanford University , is a  located in United States California State Stanford City private research University .
+After => Stanford University, is a located in Stanford California United States private research University.
+Test Set Sentence 2:
+Base  => this school locate in Silicon Valley Northwest near Palo Alto .
+After => This school locating in the Northwest of Silicon Valley closes to Palo Alto.
+Test Set Sentence 3:
+Base  => Stanford trained many famous person , and because academy reputation  was rated as world most famous advanced university one of .
+After => Stanford trained many famous people, and because academy reputation was rated is world one of the most famous advanced university.
+Test Set Sentence 4:
+Base  => University in currently totally have 7  academy college .
+After => University department currently totally has 7 academy colleges.
+Test Set Sentence 5:
+Base  => 1901 December , physicist Rontgen got Nobel prize .
+After => December 1901, physicist Rontgen got Nobel prize.
+Test Set Sentence 6:
+Base  => Stanford alumnus established numerous famous company organization , for example : Google , Yahoo , HP , Nike , Sun Microsystems wait .
+After => Stanford alumnus established numerous famous companies organizations, such as Google, Yahoo, HP, Nike, Sun Microsystems, etc.
+Test Set Sentence 7:
+Base  => Martin Luther handwriting originals save in this school .
+After => Martin Luther handwriting originals save in this school.
+Test Set Sentence 8:
+Base  => Stanford long time since also is most difficult enroll advanced university one of .
+After => Stanford long time since also is one of the most difficult enrolling advanced university.
+Test Set Sentence 9:
+Base  => in 36631  2016 undergraduate course applicant among , only 2427 person get admit , is entire nation second selective most high University .
+After => In 36631 2016 undergraduate course applicant among, only 2427 people gets admits, am entire nation second selective the highest University.
+Test Set Sentence 10:
+Base  => rely on school talented person superiority and rich funds , equipment condition , Stanford University in science research aspect became most good organization one of .
+After => Relying on school talented person superiority and rich funds, equipment condition, Stanford University in one of science research aspects became the best organization.
+Test Set Sentence 11:
+Base  => locate in Google Northwest Stanford University create school time not at all very famous .
+After => Locating in the Northwest of Google Stanford University found school time not at all very famous.
+Test Set Sentence 12:
+Base  => 1891 October 1 , Stanford University held opening ceremony .
+After => October 1 1891, Stanford University held opening ceremony.
+Test Set Sentence 13:
+Base  => its alumnus cover 30  magnate entrepreneur and 17  astronaut , also as train most many United States congress member institution one of .
+After => Its alumnus cover 30 magnate entrepreneurs and 17 astronauts, also is train one of the most United States congress member institutions.
+Test Set Sentence 14:
+Base  => Silicon Valley have many important organization , for example : Stanford University , Google wait .
+After => Silicon Valley has many important organizations, such as Stanford University, Google, etc.
+Test Set Sentence 15:
+Base  => 1924 March , old Stanford be born in most rich farmer family one of .
+After => March 1924, old Stanford is born in one of the richest farmer family.
