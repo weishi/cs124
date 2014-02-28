@@ -17,7 +17,7 @@ from pattern.en import conjugate
 
 class Translator:
     def __init__(self):
-        self.filename='dictionary.txt'
+        self.filename='../corpus/dictionary.txt'
         self.dict = {}
         bgm  = nltk.collocations.BigramAssocMeasures()
         finder = nltk.collocations.BigramCollocationFinder.from_words(nltk.corpus.brown.words())
@@ -292,7 +292,7 @@ def main():
     runner=Translator()
     runner.loadDictionary()
     
-    f = codecs.open('dev.data.pos.txt','r','utf-8')
+    f = codecs.open('../corpus/data.pos.txt','r','utf-8')
     ls = [line.strip() for line in f]
 
     for j in range(0, len(ls)) :
