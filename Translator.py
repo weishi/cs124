@@ -10,6 +10,7 @@ from pattern.en import verbs, conjugate, PARTICIPLE
 import nltk
 import nltk.collocations
 import nltk.corpus
+from nltk.corpus import wordnet
 
 from stat_parser import Parser, display_tree
 from nltk.tree import Tree
@@ -127,7 +128,6 @@ class Translator:
     def orderOneOf(self, sentence):
         full_sentence = nltk.word_tokenize(' '.join(sentence))
         tags = nltk.pos_tag(full_sentence)
-        print tags
         new_sentence = []
         for i in range(len(full_sentence) - 1):
             if full_sentence[i] == 'one' and full_sentence[i + 1] == 'of':
@@ -150,10 +150,10 @@ class Translator:
 
     def pluralize(self, tree):
         if type(tree) is Tree:
-            if tree.node == 'VB':
+            if tree.node in ['VB', 'VP'] and not type(tree[0]) is Tree:
                 tree[0] = pattern.en.conjugate(tree[0], '3sg')
-            if tree.node == 'VBP':
-                tree[0] = pattern.en.conjugate(tree[0], tense=PARTICIPLE, parse=True)
+            #if tree.node == 'VBP':
+            #   tree[0] = pattern.en.conjugate(tree[0], tense=PARTICIPLE, parse=True)
             if tree.node in ['NP','ADJP','UCP']:
                 findCD = False
                 for child in tree:
@@ -167,6 +167,7 @@ class Translator:
                         findCD = True
                     if findCD and child.node == 'NN':
                         child[0] = pattern.en.pluralize(child[0])
+
             for child in tree:
                 self.pluralize(child)
 
@@ -185,6 +186,26 @@ class Translator:
                         break
             for child in tree:
                 self.arrangeLocations(child)
+
+    def uncompleteSentence(self, sentence):
+        full_sentence = nltk.word_tokenize(' '.join(sentence))
+        tags = nltk.pos_tag(full_sentence)
+        new_sentence = []
+        for i in range(len(full_sentence) - 1):
+            isVerb = True
+            synsets = wordnet.synsets(tags[i][0])
+            for syn in synsets:
+                if 'verb.' not in syn.lexname:
+                    isVerb = False
+                    break
+            if ('NN' == tags[i][1] or tags[i][1] == 'RB') and isVerb:
+                new_sentence.append(conjugate(tags[i][0], 'part'))
+            elif tags[i][1] == 'JJ' and isVerb:
+                new_sentence.append(conjugate(tags[i][0], 'ppart'))
+            else:
+                new_sentence.append(tags[i][0])
+        new_sentence.append(full_sentence[-1])
+        return new_sentence
 
     def forwardDirectionWord(self, tree):
         if type(tree) is Tree:
@@ -247,6 +268,9 @@ class Translator:
                             elif 'most' not in superWord:
                                 tree[i+1][0]=superWord
                                 del tree[i]
+                            else:
+                                tree[i+1][0]=superWord
+                                del tree[i]
                         return
             for child in tree:
                 self.superlative(child)
@@ -260,7 +284,7 @@ class Translator:
                 result+=wl[i]
             else:
                 result+=' '+wl[i]
-        return result
+        return result+'.'
 
 
     def postProcess(self,sentence):
@@ -268,10 +292,11 @@ class Translator:
         (self.suchAs, False),\
         (self.arrangeDate, False),\
         (self.pluralize, True), \
-        (self.forwardDirectionWord, True), \
         (self.arrangeLocations, True),\
         (self.superlative, True),\
-        (self.orderOneOf, False) \
+        (self.orderOneOf, False), \
+        (self.forwardDirectionWord, True), \
+        (self.uncompleteSentence, False) \
         ]
 
         #Process flat sentence first
@@ -300,6 +325,7 @@ def main():
         print 'Base  =>', ' '.join(wl) 
         #tree = runner.parse(wl)
         #display_tree(tree)
+        #del tree
         wl = runner.preProcess(i, 'advanced')
         sentence=runner.postProcess(wl)
         #wl = tree.leaves()
