@@ -127,6 +127,7 @@ class Translator:
     def orderOneOf(self, sentence):
         full_sentence = nltk.word_tokenize(' '.join(sentence))
         tags = nltk.pos_tag(full_sentence)
+        print tags
         new_sentence = []
         for i in range(len(full_sentence) - 1):
             if full_sentence[i] == 'one' and full_sentence[i + 1] == 'of':
@@ -138,6 +139,10 @@ class Translator:
                     elif tags[j][1] == 'IN' or ('VB' in tags[j][1] and tags[j][1] != 'VBD'):
                         new_sentence.insert(j + 1, 'of')
                         new_sentence.insert(j + 1, 'one')
+                        break
+                    elif tags[j][1] == 'DT':
+                        new_sentence.insert(j, 'of')
+                        new_sentence.insert(j, 'one')
                         break
             elif i < 2 or (full_sentence[i] != 'of' and full_sentence[i - 1] != 'one'):
                 new_sentence.append(full_sentence[i])
@@ -271,7 +276,6 @@ class Translator:
 
         #Process flat sentence first
         for (func,isTree) in strategies:
-            print func
             if not isTree:
                 sentence=func(sentence)
             else:
