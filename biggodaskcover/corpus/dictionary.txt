@@ -1,0 +1,153 @@
+斯坦福: Stanford
+大学: University
+为: as(P); for; be(VC); act as(VV); become(VV); mean(VV); make(VV); because of(P)
+一: a(CD); an(CD); one(AA)
+所: (M); place(NN); office(NN); spot(NN)
+坐落: located
+于: in(P); at(P); on(P); to(P); for(P); of(P); with regard to(P); in regard to(P); 
+美国: United States
+加利福尼亚州: California State
+市: City
+私立: private
+研究型: research
+该: this
+校: school
+位于: locate in
+硅谷: Silicon Valley
+西北方: Northwest
+邻近: near(P); neighboring(AD); close to(VV)
+帕罗: Palo
+奥图: Alto
+培养: train
+不少: many
+著名: famous
+人士: person
+并: and
+因: because(P); because of(P)
+学术: academy(NN); education(NN)
+声誉: reputation
+而: (MSP); and(CC); while(P); but(MSP);
+获评: was rated
+世上: world
+最: most
+高等: advanced
+学府: university
+之一: one of
+辖下: in(P); under(P); department(NN)
+目前: currently
+共: totally
+有: have
+学院: college(NN); institute(NN)
+自: from(P); oneself(PN); certainly(AD)
+1950年代: 1950’s
+起: start(VV); from(LC)
+已经: already
+名: (M); name(NN)
+诺贝尔: Nobel
+奖: prize(NN); award(NN)
+得主: winner
+现: present(AD); current(AD)
+或: or
+曾: once
+学习: learn
+工作: work
+其: its(PN); their(PN): his(PN); her(PN)
+校友: alumnus
+涵盖: cover
+富豪: magnate
+企业家: entrepreneur
+及: and
+太空员: astronaut
+亦: also
+多: many(AD); much(AD)
+国会: congress
+成员: member
+院校: institution
+创办: establish(VV): found(VV)
+众多: numerous
+公司: company
+机构: organization
+如: for example
+谷歌: Google
+雅虎: Yahoo
+惠普: HP
+耐克: Nike
+升阳电脑: Sun Microsystems
+等: wait(VV); etc.(ETC)
+马丁: Martin
+路德: Luther
+手写: handwriting
+原稿: originals
+保存: save(NN); keep(NN); preserve(NN); hold(NN); conserve(NN)
+地: place
+长期: long time
+以来: since
+难: difficult
+入读: enroll
+在: in(P); at(P)
+2016年: 2016
+本科: undergraduate
+课程: course
+申请者: applicant
+当中: among
+只有: only
+人: person(NN); people(NN)
+获得: get; obtain; receive; gain; acquire
+录取: admit
+是: is; am: are
+全: entire; all
+国: nation; country
+第二: second
+选择性: selective
+高: high
+凭借: rely on(VV); depend on(VV)
+学校: school
+人才: talented person
+优势: superiority
+和: and
+丰富: rich
+资金: funds
+设备: equipment
+条件: condition
+研究: research
+科学: science
+方面: aspect
+取得: obtain
+十分: very(AD); fully(AD)
+突出: prominent
+成绩: score
+谈: talk
+个: (m); individual(JJ)
+重要: important
+话题: topic
+就是: is
+老: old
+出生: be born
+富裕: rich 
+农场主: farmer
+家庭: family
+有着: have
+西部: west
+哈佛: Harvard
+之称: said
+创: create(VV); found(VV)
+时: time
+并不: not at all 
+有名: famous
+1891年: 1891
+1901年: 1901
+10月: October
+12月: December 
+1日: 1
+举行: hold
+开学典礼: opening ceremony
+伦琴: Rontgen
+物理学家: physicist
+比如: for example
+很多: many
+组织: organization
+成为: become
+好: good
+也: also 
+1924年: 1924
+3月: March

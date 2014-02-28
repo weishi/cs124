@@ -10,7 +10,6 @@ from pattern.en import verbs, conjugate, PARTICIPLE
 import nltk
 import nltk.collocations
 import nltk.corpus
-from nltk.corpus import wordnet
 
 from stat_parser import Parser, display_tree
 from nltk.tree import Tree
@@ -18,7 +17,7 @@ from pattern.en import conjugate
 
 class Translator:
     def __init__(self):
-        self.filename='dictionary.txt'
+        self.filename='../corpus/dictionary.txt'
         self.dict = {}
         bgm  = nltk.collocations.BigramAssocMeasures()
         finder = nltk.collocations.BigramCollocationFinder.from_words(nltk.corpus.brown.words())
@@ -140,10 +139,6 @@ class Translator:
                         new_sentence.insert(j + 1, 'of')
                         new_sentence.insert(j + 1, 'one')
                         break
-                    elif tags[j][1] == 'DT':
-                        new_sentence.insert(j, 'of')
-                        new_sentence.insert(j, 'one')
-                        break
             elif i < 2 or (full_sentence[i] != 'of' and full_sentence[i - 1] != 'one'):
                 new_sentence.append(full_sentence[i])
         return new_sentence
@@ -186,26 +181,6 @@ class Translator:
                         break
             for child in tree:
                 self.arrangeLocations(child)
-
-    def uncompleteSentence(self, sentence):
-        full_sentence = nltk.word_tokenize(' '.join(sentence))
-        tags = nltk.pos_tag(full_sentence)
-        new_sentence = []
-        for i in range(len(full_sentence) - 1):
-            isVerb = True
-            synsets = wordnet.synsets(tags[i][0])
-            for syn in synsets:
-                if 'verb.' not in syn.lexname:
-                    isVerb = False
-                    break
-            if ('NN' == tags[i][1] or tags[i][1] == 'RB') and isVerb:
-                new_sentence.append(conjugate(tags[i][0], 'part'))
-            elif tags[i][1] == 'JJ' and isVerb:
-                new_sentence.append(conjugate(tags[i][0], 'ppart'))
-            else:
-                new_sentence.append(tags[i][0])
-        new_sentence.append(full_sentence[-1])
-        return new_sentence
 
     def forwardDirectionWord(self, tree):
         if type(tree) is Tree:
@@ -295,12 +270,12 @@ class Translator:
         (self.arrangeLocations, True),\
         (self.superlative, True),\
         (self.orderOneOf, False), \
-        (self.forwardDirectionWord, True), \
-        (self.uncompleteSentence, False) \
+        (self.forwardDirectionWord, True) \
         ]
 
         #Process flat sentence first
         for (func,isTree) in strategies:
+            #print func
             if not isTree:
                 sentence=func(sentence)
             else:
@@ -317,7 +292,7 @@ def main():
     runner=Translator()
     runner.loadDictionary()
     
-    f = codecs.open('dev.data.pos.txt','r','utf-8')
+    f = codecs.open('../corpus/data.pos.txt','r','utf-8')
     ls = [line.strip() for line in f]
 
     for j in range(0, len(ls)) :
@@ -331,7 +306,6 @@ def main():
         print 'Base  =>', ' '.join(wl) 
         #tree = runner.parse(wl)
         #display_tree(tree)
-        #del tree
         wl = runner.preProcess(i, 'advanced')
         sentence=runner.postProcess(wl)
         #wl = tree.leaves()
