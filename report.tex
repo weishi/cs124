@@ -79,7 +79,21 @@ The source of the corpus is as follows.
 
 \section{Output of the system}
 \begin{enumerate}
-\item TODO
+\item Stanford University, is a located in Stanford California United States private research University.
+\item This school locating in the Northwest of Silicon Valley closes to Palo Alto.
+\item Stanford trained many famous people, and because academy reputation was rated is world one of the most famous advanced university.
+\item University department currently totally has 7 academy colleges.
+\item December 1901, physicist Rontgen got Nobel prize.
+\item Stanford alumnus established numerous famous companies organizations, such as Google, Yahoo, HP, Nike, Sun Microsystems, etc.
+\item Martin Luther handwriting originals save in this school.
+\item Stanford long time since also is one of the most difficult enrolling advanced university.
+\item In 36631 2016 undergraduate course applicant among, only 2427 people gets admits, am entire nation second selective the highest University.
+\item Relying on school talented person superiority and rich funds, equipment condition, Stanford University in one of science research aspects became the best organization.
+\item Locating in the Northwest of Google Stanford University found school time not at all very famous.
+\item October 1 1891, Stanford University held opening ceremony.
+\item Its alumnus cover 30 magnate entrepreneurs and 17 astronauts, also is train one of the most United States congress member institutions.
+\item Silicon Valley has many important organizations, such as Stanford University, Google, etc.
+\item March 1924, old Stanford is born in one of the richest farmer family.
 \end{enumerate}
 
 \section{Corpus Segmentation and POS Tagging}
@@ -87,7 +101,31 @@ Chinese is written without spaces between words. Thus, tokenization of the Chine
 
 The POS tagging is to read text in some language and assign parts of speech to each word, such as noun, verb, adjective, etc.. After tokenizing the raw Chinese sentences in our corpus, we used Stanford Log-linear Part-Of-Speech Tagger to tag each Chinese words in the corpus. The tagger is available for download at http://nlp.stanford.edu/downloads/tagger.html.
 
+\section{Dictionary}
+We created a bilingual Chinese-English dictionary for each word in our working corpus. The corresponding translation for English was retrieved from Google Translate. For each English word, we also labeled it with its POS tag. The dictionary was stored in dictionary.txt. 
+
 \section{Translation System}
+
+The first part of the system is try to pick the most appropriate English words for the segmented Chinese sentence, there are two steps. Notice these two rules are very general rules, it actually take effects on every word of sentences. However it only take effects on certain words.
+
+\subsection{Pick Word By POS tag result}
+A Chinese word maybe translated to multiple English words. Baseline just randomly choose a word. In the postprocessing system, we use the POS tag result to choose the appropriate word. We annotate the word in our dictionary with the word type like the real dictionary. And we choose English words with the same tag as the Chinese word.
+Later, it is also being used to remove the measure word which English doesn't really have.
+
+Where the rule applies:
+\begin{itemize}
+\item Dev Set: Sentence 4 - 大学辖下:"University in"  was translated to  "University Department"; Sentence 6 - 等等: "“Sun Microsystems, wait" "Sun Microsystems, etc."
+\item Test Set: Sentence 4 - 比如: "For example"  was translated to  "Such as"
+\end{itemize}
+
+\subsection{Applying bigram language model}
+If there are still more than one option after filtered by the POS tag, we use a bigram model to choose the most possible word to fill in by consulting the bigram dictionary with distribution frequency.
+Where the rule applies:
+\begin{itemize}
+\item Test Set: Sentence 1 - 创校:"create school"  was translated to  "found school"
+\end{itemize}
+*The bigram rule only took effect on one word in our corpus. However it is still a very general rule.
+
 \subsection{Reorder date representation}
 The way Chinese represents date is different from English. In Chinese, Year always comes first, then Month, and then Day; whereas English uses a Month-Day, Year pattern. This can be easily translated by matching the pattern with regular expression.
 
@@ -116,35 +154,29 @@ Where the rule applies:
 \end{itemize}
 
 \subsection{Reorder 'one of'}
-TODO
+It is very unlike English, Chinese append "之一" in the end of a plural noun phrase to express the concept of "one of" we set some simple rule to move one of the front of the noun phrase. The simple rule try to dictate the nearest boundary of the plural noun phrase like "the" or superlative words.
 Where the rule applies:
 \begin{itemize}
-\item Dev Set: Sentence 1 - ""
-\item Test Set: Sentence 1 - ""
+\item Dev Set: Sentence 3 - "最著名的高等学府之一"; Sentence 8 - "最难入读的高等学府之一"; Sentence 10 -"最好的机构之一"
+\item Test Set: Sentence 3 - "最多美国国会成员的院校之一"; Sentence 5 - "最富裕的农场主家庭之一"
 \end{itemize}
 
 \subsection{Inferring past tense}
-TODO
+In Chinese, the concept of past tense is not really existing. However, usually Chinese use "了" as an indication fo the action happened already, therefore, we put every verb preceding a "了" in past tense by using the pattern.en package.
 Where the rule applies:
 \begin{itemize}
-\item Dev Set: Sentence 1 - ""
-\item Test Set: Sentence 1 - ""
-\end{itemize}
-
-\subsection{Applying bigram language model}
-TODO
-Where the rule applies:
-\begin{itemize}
-\item Dev Set: Sentence 1 - ""
-\item Test Set: Sentence 1 - ""
+\item Dev Set: Sentence 3 - "培养了"; Sentence 6 - "创办了"
+\item Test Set: Sentence 1 - "举行了"
 \end{itemize}
 
 \subsection{Conjugating verb in subclauses}
-TODO
+In the direct translation, it couldn't tell the subclauses apart from the main sentence. We observe some sentence have two verbal phrases. Since it is hard for us to made them to be actual cause, we conjugate the verb in the subclause to made the clause to be a noun phrases instead. 
+
+The method used the POS tag result. If a word in wordnet doesn't have any lexical name other than verb and word is not being tagged as a verb, then we use the present form of the verb instead of infinitive form by using the pattern.en package.
 Where the rule applies:
 \begin{itemize}
-\item Dev Set: Sentence 1 - ""
-\item Test Set: Sentence 1 - ""
+\item Dev Set: Sentence 2 - "位于" was translated to  "locating in"; Sentence 10 - "凭借"  was translated to  "relying on"
+\item Test Set: Sentence 1 - "位于" was translated to  "locating in"
 \end{itemize}
 
 \subsection{Pluralization}
@@ -160,9 +192,9 @@ In this sentence, the rule changes "Stanford trained many famous person" to "Sta
 In this sentence, the rule changes "7  academy college" to "7 academy colleges".
 \item Dev Set: Sentence 6 - "众多著名的公司机构"\\
 In this sentence, the rule changes "numerous famous company organization" to "numerous famous companies organizations".
-\item Test Set: Sentence 13 - "30名富豪企业家及17名太空员"\\
+\item Test Set: Sentence 3 - "30名富豪企业家及17名太空员"\\
 In this sentence, the rule changes "30  magnate entrepreneur and 17  astronaut" to "30 magnate entrepreneurs and 17 astronauts".
-\item Test Set: Sentence 14 - "很多重要组织"\\
+\item Test Set: Sentence 4 - "很多重要组织"\\
 In this sentence, the rule changes "many important organization" to "many important organizations".
 \end{itemize}
 
@@ -189,7 +221,7 @@ Where the rule applies:
 In this sentence, the rule changes "United States California State Stanford City" to "Stanford, California, United States".
 \item Dev set: Sentence 2 - "位于硅谷的西北方邻近帕罗奥图"\\
 In this sentence, the rule changes "located in Silicon Valley Northwest close to Palo Alto" to "located in the Northwest of Silicon Valley closes to Palo Alto".
-\item Test Set: Sentence 11 - "位于谷歌西北方"
+\item Test Set: Sentence 1 - "位于谷歌西北方"
 In this sentence, the rule changes "locate in Google Northwest" to "Locate in the Northwest of Google".
 \end{itemize}
 
@@ -203,18 +235,36 @@ In this sentence, the rule changes "is one located in United States California S
 \end{itemize}
 
 \section{Comparison with Google Translate}
-TODO
-For each of the 5 test sentences:
-0 points for lack of comment;
-up to 1.25 points for adequate comment on all the differences between the outputs (the students' system's and Google Translate's), not only pointing them out but indicating which is the better translation, and why.
 
+\begin{itemize}
+\item Ours: Locating in the Northwest of Google Stanford University found school time not at all very famous.
+\item Google: Located north-west of Google when founding of Stanford University is not very famous. 
+\item Compare: Google use "located" instead of "locating" and it add a verb to the main sentence. It also picks no word for "十分" since not very famous is enough for expressing this meaning. And it add "when" to construct a subclause for "found school". 
+\end{itemize}
+\begin{itemize}
+\item Ours: October 1 1891, Stanford University held opening ceremony.
+\item Google: October 1, 1891, the opening ceremony was held at Stanford University. 
+\item Compare: Google use a more common expression for the sentence by changing it to passive.
+\end{itemize}
+\begin{itemize}
+\item Ours: Its alumnus cover 30 magnate entrepreneurs and 17 astronauts, also is train one of the most United States congress member institutions.
+\item Google: Its alumni covers 30 richest entrepreneurs and 17 astronaut, is also one of the institutions up to train members of the U.S. Congress. 
+\item Compare: It seems Google use incorrect word "up to" for Chinese word "最" and didn't figure out it should use the superlative form.
+\end{itemize}
+\begin{itemize}
+\item Ours: Silicon Valley has many important organizations, such as Stanford University, Google, etc.
+\item Google: Silicon Valley has many important organizations, such as: Stanford University, Google and so on.
+\item Compare: two sentences are actually very similar except 'etc' v.s. 'so on'
+\end{itemize}
+\begin{itemize}
+\item Ours: March 1924, old Stanford is born in one of the richest farmer family.
+\item Google: March 1924, the old Stanford was born in one of the richest farmer families.
+\item Compare: Google figure out the past tense correctly by looking at the time information. It also pluralize "family" while ours are not.
+\end{itemize}
 
 \section{Error Analysis}
 \begin{enumerate}
 \item The Chinese particle de(的) is most commonly used as a possessive modifier. It can be used between two nouns to indicate a relationship of possessor/possession. However, as this character is used in many places, we found it is difficult to identify what kind of relationship the character is indicating. For example, "我的" is "mine", "你的" is "your", "马丁路德的" is "Martin Luther's". But in other situation, the relationship is different. For instance, "硅谷的西北" is "the northwest of Silicon Valley". One of the errors our system made is failed to identify the ownership relation. The system translates "马丁路德的手写原稿" to "Martin Luther handwriting originals", whose correct translation is "Martin Luther's handwriting originals". One way to improve this would be identifying the owner object, which usually is people's name, or a pers pron. Then, recognize if the relationship is ownership.
-
-\item multiple ways to represent superlative. Only implemented the most basic rule.
-
 
 \item The English language has several subordinate clauses, which the Chinese language does not have. Thus, it is difficult for us to build subordinate clauses based on Chinese sentences. For example, "斯坦福大学 ，是一所坐落于 美国加利福尼亚州斯坦福市的私立研究型大学。", is "Stanford University is a private research university, which is located in Stanford, California, United States." But our system translates it to "Stanford University, is a located in Stanford California United States private research University." Simple rules cannot analyze semantic meanings of a sentence, but we have to extract some parts of a sentence to build a subordinate clause based on the semantic meaning. This error also occurs in Google translation. We believe that in order to solve this error, the machine translator must be intelligent enough to understand the semantic meanings.
 
@@ -223,11 +273,11 @@ up to 1.25 points for adequate comment on all the differences between the output
 
 \item Passive voice is not correctly translated. For example, "原稿保存在" becomes "handwriting saves in" instead of "handwriting is saved in". Since the Chinese sentence is valid without passive voice, the direct translation wouldn't produce a passive voice. One way to detect this is to check if the a transitive verb is followed by a preposition. If so, it's likely that there is a grammar error and passive voice is needed. However this simple rule has many complications. For example a verb can be either transitive and intransitive, or the preposition that follows may be unrelated. One way to improve this would be parsing the sentence and identify the object of the verb. If the object is missing, we probably need passive voice.
 
-\item missing subject
+\item Our translation system does not handle missing or implicitly changing subject well. It's not uncommon to omit the subject in Chinese sentences if the subject can be inferred. For example, this sentence "是全国第二选择性最高的大学。" should have a subject of Stanford University, but the subject is omitted because previous sentences have probably mentioned "Stanford University". Our system produces this result "is entire nation second most selective University", which lacks the subject. Subject can also change implicitly in Chinese, for example, this sentence "其校友涵盖30名富豪企业家及17名太空员，亦为培养最多美国国会成员的院校之一。". The first half's subject is "its alumni", but the second half is "Stanford University" and is omitted. Our result is "Its alumnus cover 30 magnate entrepreneurs and 17 astronauts, also is train one of the most United States congress member institutions.", which does not produce the correct subject. Such error is hard to fix with simple rules, because the subject heavily depends on the context. 
 
 \end{enumerate}
 
 \section{Conclusion}
-Show me the money
+This project of machine translation focuses on the post processing rules of the system. As the reader can tell from the output, the result still contains many errors. Post processing does improve a lot in comparison with the naive baseline algorithm, but it is nowhere near good natural English. Given the translation from Google Translate, we can see that there is still a lot room for improvement. Most of the problems we think lie in the overall knowledge of the sentence. Our rules lack the ability to see the bigger picture and only work on a micro level, e.g. one word or a phrase structure. The future work of this project includes putting more effort into pre-processing, where we can parse and tag the input sentence and use certain language model to help us break down the elements of the sentence. This way we perserve as much information as possible, and we believe we can only achieve a good translation with a good understanding the context.
 \end{CJK}
 \end{document}
